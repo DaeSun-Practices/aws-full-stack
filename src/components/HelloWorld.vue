@@ -3,11 +3,11 @@
     <v-row class="text-center">
       <form>
         <label>First Name :</label>
-        <input type="text" id="fName">
+        <input type="text" v-model="fName">
         <label>Last Name :</label>
-        <input type="text" id="lName">
+        <input type="text" v-model="lName">
         <!-- set button onClick method to call function we defined passing input values as parameters -->
-        <button type="button" @click="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Call API</button>
+        <button type="button" @click="callAPI()">Call API</button>
       </form>
     </v-row>
   </v-container>
@@ -34,9 +34,12 @@
 <script>
   export default {
     name: 'HelloWorld',
-
+    data: () => ({
+      fName : "", 
+      lName : "" 
+    }),
     methods: {
-      callAPI(firstName,lastName){
+      callAPI(){
         // instantiate a headers object
         let myHeaders = new Headers();
 
@@ -44,7 +47,7 @@
         myHeaders.append("Content-Type", "application/json");
 
         // using built in JSON utility package turn object to string and store in a variable
-        const raw = JSON.stringify({"firstName":firstName,"lastName":lastName});
+        const raw = JSON.stringify({"firstName":this.fName,"lastName":this.lName});
 
         // create a JSON object with parameters for API call and store in a variable
         const requestOptions = {
