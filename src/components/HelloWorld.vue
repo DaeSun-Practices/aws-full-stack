@@ -7,7 +7,7 @@
         <label>Last Name :</label>
         <input type="text" id="lName">
         <!-- set button onClick method to call function we defined passing input values as parameters -->
-        <button type="button" onclick="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Call API</button>
+        <button type="button" @click="callAPI(document.getElementById('fName').value,document.getElementById('lName').value)">Call API</button>
       </form>
     </v-row>
   </v-container>
@@ -37,29 +37,29 @@
 
     methods: {
       callAPI(firstName,lastName){
-            // instantiate a headers object
-            var myHeaders = new Headers();
+        // instantiate a headers object
+        let myHeaders = new Headers();
 
-            // add content type header to object
-            myHeaders.append("Content-Type", "application/json");
+        // add content type header to object
+        myHeaders.append("Content-Type", "application/json");
 
-            // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"firstName":firstName,"lastName":lastName});
+        // using built in JSON utility package turn object to string and store in a variable
+        const raw = JSON.stringify({"firstName":firstName,"lastName":lastName});
 
-            // create a JSON object with parameters for API call and store in a variable
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
+        // create a JSON object with parameters for API call and store in a variable
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
 
-            // make API call with parameters and use promises to get response
-            fetch("https://gelgj2bgnl.execute-api.ap-northeast-2.amazonaws.com/dev", requestOptions)
-            .then(response => response.text())
-            .then(result => alert(JSON.parse(result).body))
-            .catch(error => console.log('error', error));
-        }
+        // make API call with parameters and use promises to get response
+        fetch("https://gelgj2bgnl.execute-api.ap-northeast-2.amazonaws.com/dev", requestOptions)
+        .then(response => response.text())
+        .then(result => alert(JSON.parse(result).body))
+        .catch(error => console.log('error', error));
+      }
     }
   }
 </script>
