@@ -55,7 +55,7 @@
             };
 
             // make API call with parameters and use promises to get response
-            fetch("YOUR-API-INVOKE-URL", requestOptions)
+            fetch("https://gelgj2bgnl.execute-api.ap-northeast-2.amazonaws.com/dev", requestOptions)
             .then(response => response.text())
             .then(result => alert(JSON.parse(result).body))
             .catch(error => console.log('error', error));
